@@ -9,24 +9,18 @@ services:
     working_dir: /api
     volumes:
       - .:/api
-    environment:
-      - PORT=3333
-      - HOST_DB=postgres
-      - PORT_DB=5432
-      - NAME_DB=gostack_gobarber
-      - PASSWORD_DB=docker
-      - USERNAME_DB=postgres
+    env_file:
+      - .env.api
     stdin_open: true
     tty: true
   postgres:
     image: postgres
     ports:
       - 5432:5432
-    environment:
-      - POSTGRES_DB=gostack_gobarber
-      - POSTGRES_PASSWORD=docker
     volumes:
       - dbpostgres:/var/lib/postgresql/data
+    env_file:
+      - .env.database
 
 volumes:
   dbpostgres:
